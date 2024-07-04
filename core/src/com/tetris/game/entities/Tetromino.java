@@ -5,9 +5,10 @@ import com.tetris.game.TetrisGame;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tetromino implements Renderizable{
+public class Tetromino implements Renderizable {
     public TetrisGame game;
     public Brick[] bricks;
+
     public Tetromino(TetrisGame game) {
         this.game = game;
         List<Brick[]> typeList = new ArrayList<>();
@@ -32,10 +33,10 @@ public class Tetromino implements Renderizable{
     public void update() {
         boolean canUpdate = true;
         for (Brick brick : bricks) {
-            boolean ableToMove= brick.y < this.game.scene.map.length - 1;
+            boolean ableToMove = brick.y < this.game.scene.map.length - 1;
             if (ableToMove) {
                 boolean nextPositionValidator = this.game.scene.map[brick.y + 1][brick.x] == 0;
-                if (!nextPositionValidator){
+                if (!nextPositionValidator) {
                     canUpdate = false;
                 }
             } else {

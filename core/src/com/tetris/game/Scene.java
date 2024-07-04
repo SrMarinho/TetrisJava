@@ -54,19 +54,27 @@ public class Scene {
         this.objs.add(new Tetromino(this.game));
     }
 
-    public void event(){
+    public void event() {
         for (Renderizable obj : this.objs) {
             obj.event();
         }
-    };
-    public void update(){
+    }
+
+    ;
+
+    public void update() {
         for (Renderizable obj : this.objs) {
             obj.update();
         }
-    };
-    public void render(){
+    }
+
+    ;
+
+    public void render() {
         for (Renderizable obj : this.objs) {
             obj.render();
         }
-    };
+    }
+
+    ;
 }
