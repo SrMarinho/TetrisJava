@@ -13,7 +13,7 @@ public class DesktopLauncher {
 		config.setForegroundFPS(60);
 		config.setTitle("Tetris");
 		config.setWindowedMode(width, height);
-		config.setWindowPosition(2400, (738 / 2) - 120);
+//		config.setWindowPosition(2400, (738 / 2) - 120);
 		new Lwjgl3Application(new TetrisGame(), config);
 	}
 }
