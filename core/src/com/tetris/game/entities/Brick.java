@@ -26,9 +26,6 @@ public class Brick implements Renderizable {
 
     @Override
     public void update() {
-        this.game.scene.map[this.y][this.x] = 0;
-        this.y += 1;
-        this.game.scene.map[this.y][this.x] = 1;
     }
 
     @Override
@@ -36,5 +33,9 @@ public class Brick implements Renderizable {
         this.game.batch.begin();
         this.game.batch.draw(this.texture, this.x * this.game.grid_col_size, this.game.scene.height - ((this.y + 1) * this.game.grid_row_size), this.game.grid_col_size, this.game.grid_row_size);
         this.game.batch.end();
+    }
+
+    public void move_down() {
+        this.y += 1;
     }
 }
