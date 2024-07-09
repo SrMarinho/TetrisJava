@@ -1,5 +1,6 @@
 package com.tetris.game.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.tetris.game.TetrisGame;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
@@ -21,11 +22,12 @@ public class Background implements Renderizable {
 
     @Override
     public void render() {
-        for (int y = 0; y < this.game.scene.map.length; y++) {
-            for (int x = 0; x < this.game.scene.map[0].length; x++) {
-                this.game.shape.begin(ShapeType.Filled);
+        int blockSize = this.game.width / 10;
+        for (int x = 0; x < 10; x++) {
+            for (int y = 0; y < 20; y++) {
+                this.game.shape.begin(ShapeType.Line);
                 this.game.shape.setColor(100/255F, 100/255F, 100/255F, 1);
-                this.game.shape.circle((x * this.game.grid_col_size) + (this.game.grid_col_size / 2), (y * this.game.grid_row_size) + (this.game.grid_row_size / 2), 1);
+                this.game.shape.rect(x * blockSize, Gdx.graphics.getHeight() - (blockSize * (y + 1)), blockSize, blockSize);
                 this.game.shape.end();
             }
         }

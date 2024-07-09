@@ -7,8 +7,8 @@ import com.tetris.game.TetrisGame;
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		int width = 350;
-		int height = (width / 12) * 22;
+		int width = 550;
+		int height = 700;
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.setTitle("Tetris");

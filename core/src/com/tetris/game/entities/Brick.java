@@ -7,6 +7,7 @@ public class Brick implements Renderizable {
     public TetrisGame game;
     public int x;
     public int y;
+    public int size;
     public int color;
     public Texture texture;
 
@@ -14,14 +15,13 @@ public class Brick implements Renderizable {
         this.game = game;
         this.x = x;
         this.y = y;
+        this.size = this.game.width / 10;
         this.color = color;
         this.texture = this.game.textureList.get(this.color);
     }
 
     @Override
     public void event() {
-        boolean insideMapWidth = this.x < this.game.scene.map[0].length - 1;
-        boolean insideMapHeight = this.y < this.game.scene.map.length - 1;
     }
 
     @Override
@@ -31,7 +31,12 @@ public class Brick implements Renderizable {
     @Override
     public void render() {
         this.game.batch.begin();
-        this.game.batch.draw(this.texture, this.x * this.game.grid_col_size, this.game.scene.height - ((this.y + 1) * this.game.grid_row_size), this.game.grid_col_size, this.game.grid_row_size);
+        this.game.batch.draw(
+                this.texture,
+                this.x * this.size,
+                this.y * this.size,
+                this.size, this.size
+        );
         this.game.batch.end();
     }
 

@@ -22,11 +22,21 @@ public class TetrisGame extends ApplicationAdapter {
     public ShapeRenderer shape;
     public int move_time;
     Instant last_move_time;
+    public int width;
+    public int height;
+    public int cols;
+    public int rows;
+    public boolean gameOver;
 
     public TetrisGame() {
         this.textureList = new ArrayList<>();
         this.move_time = 200;
         this.last_move_time = Instant.now();
+        this.cols = 10;
+        this.rows = 20;
+        this.width = 350;
+        this.height = (width / this.cols) * this.rows;
+        this.gameOver = false;
     }
 
     @Override
@@ -34,15 +44,13 @@ public class TetrisGame extends ApplicationAdapter {
         batch = new SpriteBatch();
         shape = new ShapeRenderer();
 
-        this.grid_col_size = (float) Gdx.graphics.getWidth() / 10;
-        this.grid_row_size = (float) Gdx.graphics.getHeight() / 20;
-
         this.textureList.add(new Texture("1.png"));
         this.textureList.add(new Texture("2.png"));
         this.textureList.add(new Texture("3.png"));
         this.textureList.add(new Texture("4.png"));
         this.textureList.add(new Texture("5.png"));
         this.textureList.add(new Texture("6.png"));
+        this.textureList.add(new Texture("7.png"));
 
         this.scene = new Scene(this);
 
@@ -50,7 +58,7 @@ public class TetrisGame extends ApplicationAdapter {
 
     @Override
     public void render() {
-        ScreenUtils.clear(30 / 255F, 30 / 255F, 30 / 255F, 1);
+        ScreenUtils.clear(40 / 255F, 60 / 255F, 80 / 255F, 1);
 
         this.scene.event();
         Instant current_time = Instant.now();
