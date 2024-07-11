@@ -2,6 +2,7 @@ package com.tetris.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -17,11 +18,9 @@ public class TetrisGame extends ApplicationAdapter {
     public SpriteBatch batch;
     public List<Texture> textureList;
     public Scene scene;
-    public float grid_col_size;
-    public float grid_row_size;
+    public SidePanel sidePanel;
     public ShapeRenderer shape;
     public int move_time;
-    Instant last_move_time;
     public int width;
     public int height;
     public int cols;
@@ -30,8 +29,7 @@ public class TetrisGame extends ApplicationAdapter {
 
     public TetrisGame() {
         this.textureList = new ArrayList<>();
-        this.move_time = 200;
-        this.last_move_time = Instant.now();
+        this.move_time = 150;
         this.cols = 10;
         this.rows = 20;
         this.width = 350;
@@ -53,21 +51,36 @@ public class TetrisGame extends ApplicationAdapter {
         this.textureList.add(new Texture("7.png"));
 
         this.scene = new Scene(this);
-
+        this.sidePanel = new SidePanel(
+                this,
+                this.scene.width,
+                0,
+                Gdx.graphics.getWidth() - this.scene.width,
+                Gdx.graphics.getHeight()
+        );
     }
 
     @Override
     public void render() {
         ScreenUtils.clear(40 / 255F, 60 / 255F, 80 / 255F, 1);
 
+        this.restart();
+
         this.scene.event();
-        Instant current_time = Instant.now();
-        Duration duration = Duration.between(this.last_move_time, current_time);
-        if (duration.toMillis() > this.move_time) {
-            this.scene.update();
-            this.last_move_time = current_time;
-        }
+        this.sidePanel.event();
+
+        this.scene.update();
+        this.sidePanel.update();
+
         this.scene.render();
+        this.sidePanel.render();
+    }
+
+    public void restart() {
+        if (Gdx.input.isKeyPressed(Input.Keys.R)) {
+            this.scene = new Scene(this);
+            this.gameOver = false;
+        }
     }
 
     @Override
